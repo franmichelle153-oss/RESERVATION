@@ -18,9 +18,9 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 40%, #e0f2f1 100%);
         }
 
-        .card {
-            width: 450px;
-            min-width: 450px;
+       .card {
+    width: 370px;
+    min-width: 370px;
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(45,106,53,0.15), 0 0 0 1px rgba(109,190,71,0.1);
@@ -30,7 +30,7 @@
 
         .card-header {
             background: linear-gradient(135deg, #2d6a3f, #3a7d4e);
-            padding: 22px 36px 20px;
+            padding: 22px 24px 20px;
             text-align: center;
             color: white;
         }
@@ -45,7 +45,7 @@
 
         .card-body {
             background: white;
-            padding: 20px 36px;
+            padding: 20px 24px;
             flex: 1;
             display: flex;
             flex-direction: column;

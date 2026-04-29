@@ -19,10 +19,10 @@
         }
 
         .card {
-            width: 450px;
-            min-width: 450px;
+           width: 370px;
+    min-width: 370px;
             border-radius: 24px;
-            overflow: visible;
+            overflow: hidden;
             box-shadow: 0 20px 60px rgba(45,106,53,0.15), 0 0 0 1px rgba(109,190,71,0.1);
             display: flex;
             flex-direction: column;
@@ -30,7 +30,7 @@
 
         .card-header {
             background: linear-gradient(135deg, #2d6a3f, #3a7d4e);
-            padding: 16px 36px 14px;
+            padding: 16px 24px 14px;
             text-align: center;
             color: white;
         }
@@ -45,7 +45,7 @@
 
         .card-body {
             background: white;
-            padding: 24px 32px;
+            padding: 24px 22px;
             flex: 1;
             display: flex;
             flex-direction: column;

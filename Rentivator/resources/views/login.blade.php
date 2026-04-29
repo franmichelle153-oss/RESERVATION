@@ -8,25 +8,25 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 40%, #e0f2f1 100%);
-        }
+       body {
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 40%, #e0f2f1 100%);
+}
 
-       .card {
+    .card {
     width: 370px;
-    min-width: 370px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(45,106,53,0.15), 0 0 0 1px rgba(109,190,71,0.1);
-            display: flex;
-            flex-direction: column;
-        }
+    min-width: 320px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(45,106,53,0.15), 0 0 0 1px rgba(109,190,71,0.1);
+    display: flex;
+    flex-direction: column;
+}
 
         .card-header {
             background: linear-gradient(135deg, #2d6a3f, #3a7d4e);

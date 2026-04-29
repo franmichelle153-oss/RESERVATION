@@ -1,6 +1,20 @@
 #!/usr/bin/env sh
 set -e
 
+# Install system dependencies
+apt-get update && apt-get install -y \
+  php \
+  php-cli \
+  php-fpm \
+  php-mysql \
+  php-mbstring \
+  php-xml \
+  php-curl \
+  php-zip \
+  composer \
+  npm \
+  git
+
 # Change to Rentivator directory
 cd Rentivator
 
@@ -9,15 +23,8 @@ if [ ! -f .env ] && [ -f .env.example ]; then
   cp .env.example .env
 fi
 
-# Install PHP dependencies if needed
+# Install PHP dependencies
 if [ -f composer.json ] && [ ! -d vendor ]; then
-  # Check if composer is available
-  if ! command -v composer &> /dev/null; then
-    # Download and install composer
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-    php -r "@unlink('composer-setup.php');"
-  fi
   composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 fi
 

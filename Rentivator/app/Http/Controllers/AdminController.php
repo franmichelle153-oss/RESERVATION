@@ -51,8 +51,10 @@ class AdminController extends Controller
 
     // ── BOOKINGS ───────────────────────────────
     public function bookings(Request $request)
-    {
-        $period     = $request->input('period', 'daily');
+{
+    try { $this->runAutoOnField(); } catch (\Exception $e) { \Log::error($e->getMessage()); }
+
+    $period     = $request->input('period', 'daily');
         $filterDate = $request->input('date', Carbon::today()->toDateString());
 
         // Active bookings (non-completed)
@@ -367,9 +369,10 @@ class AdminController extends Controller
                 $r->update(['status' => 'completed']);
 
                 if (!Transaction::where('reservation_id', $r->id)->exists()) {
-                    $vehicle  = $r->vehicle;
-                    $hectares = (float) ($r->hectares ?? 1);
-                    $gross    = ($vehicle->rate ?? 0) * $hectares;
+    $vehicle  = $r->vehicle;
+    if (!$vehicle) return;
+    $hectares = (float) ($r->hectares ?? 1);
+    $gross    = ($vehicle->rate ?? 0) * $hectares;
 
                     // ── Expenses × hectares ──────────────────────
                     $driverPay     = (float) ($vehicle->driver_pay     ?? 0) * $hectares;

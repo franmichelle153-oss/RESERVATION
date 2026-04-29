@@ -245,12 +245,7 @@
         <i class="fa-solid fa-lock"></i>
         <input type="password" id="password" name="password" 
                placeholder="Min. 6 chars" required>
-       <i class="fa-solid fa-eye eye-icon" id="eye1open" 
-   onclick="togglePw('password','eye1open','eye1closed')"
-   style="position:absolute; right:10px; bottom:12px; cursor:pointer; left:auto;"></i>
-<i class="fa-solid fa-eye-slash eye-icon" id="eye1closed" 
-   onclick="togglePw('password','eye1open','eye1closed')"
-   style="position:absolute; right:10px; bottom:12px; cursor:pointer; left:auto; display:none;"></i>
+      
     </div>
                     <div class="input-group">
     <label>Confirm</label>

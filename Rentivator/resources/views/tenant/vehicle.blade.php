@@ -552,10 +552,10 @@
                          data-name="{{ strtolower($v->name) }}">
 
                         <div class="card-img-wrap">
-                            @if($v->image_path)
-                                <img src="{{ Storage::url($v->image_path) }}"
-                                     style="width:100%;height:200px;object-fit:cover;" alt="{{ $v->name }}">
-                            @else
+                            @if($v->image_data)
+    <img src="{{ $v->image_data }}"
+         style="width:100%;height:200px;object-fit:cover;" alt="{{ $v->name }}">
+@else
                                 <div class="card-img-placeholder" style="background: {{ $bg }};">
                                     <i class="fa-solid {{ $icon }}"></i>
                                 </div>

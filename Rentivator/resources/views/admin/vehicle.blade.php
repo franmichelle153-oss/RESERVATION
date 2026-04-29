@@ -159,9 +159,9 @@
                 @endphp
                 <div class="vehicle-card" data-name="{{ strtolower($v->name) }}" data-type="{{ strtolower($v->type) }}" data-status="{{ strtolower($v->status) }}">
                     <div class="vehicle-img" style="background:{{ $bg }};">
-                        @if($v->image_path)
-                            <img src="{{ Storage::url($v->image_path) }}" alt="{{ $v->name }}">
-                        @else
+                        @if($v->image_data)
+    <img src="{{ $v->image_data }}" alt="{{ $v->name }}">
+@else
                             <i class="fa-solid {{ $icon }} icon-fallback" style="color:{{ $iconColor }};"></i>
                         @endif
                     </div>

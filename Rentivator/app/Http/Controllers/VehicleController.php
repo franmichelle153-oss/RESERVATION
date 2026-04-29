@@ -14,47 +14,47 @@ class VehicleController extends Controller
         return view('admin.vehicle', compact('vehicles'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name'            => 'required|string|max:255',
-            'type'            => 'required|string',
-            'rate'            => 'required|numeric|min:1',
-            'max_hectares'    => 'required|integer|min:1',
-            'status'          => 'required|in:available,onfield,maintenance',
-            'photo'           => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'driver_name'     => 'nullable|string|max:255',
-            'driver_pay'      => 'nullable|numeric|min:0',
-            'helper1_name'    => 'nullable|string|max:255',
-            'helper2_name'    => 'nullable|string|max:255',
-            'helper3_name'    => 'nullable|string|max:255',
-            'helper_pay_each' => 'nullable|numeric|min:0',
-            'diesel_cost'     => 'nullable|numeric|min:0',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'name'            => 'required|string|max:255',
+        'type'            => 'required|string',
+        'rate'            => 'required|numeric|min:1',
+        'max_hectares'    => 'required|integer|min:1',
+        'status'          => 'required|in:available,onfield,maintenance',
+        'photo'           => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        'driver_name'     => 'nullable|string|max:255',
+        'driver_pay'      => 'nullable|numeric|min:0',
+        'helper1_name'    => 'nullable|string|max:255',
+        'helper2_name'    => 'nullable|string|max:255',
+        'helper3_name'    => 'nullable|string|max:255',
+        'helper_pay_each' => 'nullable|numeric|min:0',
+        'diesel_cost'     => 'nullable|numeric|min:0',
+    ]);
 
-        $imagePath = null;
-        if ($request->hasFile('photo')) {
-            $imagePath = $request->file('photo')->store('vehicles', 'public');
-        }
-
-        Vehicle::create([
-            'name'            => $request->name,
-            'type'            => $request->type,
-            'rate'            => $request->rate,
-            'max_hectares'    => $request->max_hectares,
-            'status'          => $request->status,
-            'image_path'      => $imagePath,
-            'driver_name'     => $request->driver_name,
-            'driver_pay'      => $request->driver_pay      ?? 0,
-            'helper1_name'    => $request->helper1_name,
-            'helper2_name'    => $request->helper2_name,
-            'helper3_name'    => $request->helper3_name,
-            'helper_pay_each' => $request->helper_pay_each ?? 0,
-            'diesel_cost'     => $request->diesel_cost     ?? 0,
-        ]);
-
-        return redirect()->route('admin.vehicle')->with('success', 'Vehicle added successfully!');
+    $imageData = null;
+    if ($request->hasFile('photo')) {
+        $imageData = 'data:' . $request->file('photo')->getMimeType() . ';base64,' . base64_encode(file_get_contents($request->file('photo')->getRealPath()));
     }
+
+    Vehicle::create([
+        'name'            => $request->name,
+        'type'            => $request->type,
+        'rate'            => $request->rate,
+        'max_hectares'    => $request->max_hectares,
+        'status'          => $request->status,
+        'image_data'      => $imageData,
+        'driver_name'     => $request->driver_name,
+        'driver_pay'      => $request->driver_pay      ?? 0,
+        'helper1_name'    => $request->helper1_name,
+        'helper2_name'    => $request->helper2_name,
+        'helper3_name'    => $request->helper3_name,
+        'helper_pay_each' => $request->helper_pay_each ?? 0,
+        'diesel_cost'     => $request->diesel_cost     ?? 0,
+    ]);
+
+    return redirect()->route('admin.vehicle')->with('success', 'Vehicle added successfully!');
+}
 
     public function update(Request $request, Vehicle $vehicle)
     {
@@ -78,10 +78,9 @@ class VehicleController extends Controller
         $oldStatus = $vehicle->status;
         $newStatus = $request->status;
 
-        if ($request->hasFile('photo')) {
-            if ($vehicle->image_path) Storage::disk('public')->delete($vehicle->image_path);
-            $vehicle->image_path = $request->file('photo')->store('vehicles', 'public');
-        }
+       if ($request->hasFile('photo')) {
+    $vehicle->image_data = 'data:' . $request->file('photo')->getMimeType() . ';base64,' . base64_encode(file_get_contents($request->file('photo')->getRealPath()));
+}
 
         $vehicle->name            = $request->name;
         $vehicle->type            = $request->type;

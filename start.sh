@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 set -e
 
+# Change to Rentivator directory
+cd Rentivator
+
 # Ensure environment file exists
 if [ ! -f .env ] && [ -f .env.example ]; then
   cp .env.example .env
@@ -10,7 +13,6 @@ fi
 if [ -f composer.json ] && [ ! -d vendor ]; then
   composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 fi
-
 
 # Optional frontend build step for Vite assets
 if [ -f package.json ]; then

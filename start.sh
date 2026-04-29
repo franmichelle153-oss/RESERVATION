@@ -11,6 +11,13 @@ fi
 
 # Install PHP dependencies if needed
 if [ -f composer.json ] && [ ! -d vendor ]; then
+  # Check if composer is available
+  if ! command -v composer &> /dev/null; then
+    # Download and install composer
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    php -r "@unlink('composer-setup.php');"
+  fi
   composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 fi
 

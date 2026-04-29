@@ -23,6 +23,7 @@ Route::post('/login',    [UserController::class, 'login']);
 Route::get('/register',  [UserController::class, 'showRegister'])->name('register');
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout',   [UserController::class, 'logout'])->name('logout');
+Route::get('/logout',    [UserController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
 

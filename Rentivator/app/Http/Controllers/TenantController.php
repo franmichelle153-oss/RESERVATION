@@ -131,7 +131,7 @@ if ($request->hectares > $remaining) {
                     AppNotification::create([
                         'user_id' => $admin->id,
                         'type'    => 'booking_placed',
-                        'title'   => 'New Booking Request 📅',
+                       'title' => 'New Booking Request — ' . Carbon::parse($request->reservation_date)->format('M d, Y'),
                         'message' => "{$tenantName} reserved {$vehicleName} for {$date}. Tap to review.",
                         'data'    => ['booking_id' => $reservation->id],
                     ]);

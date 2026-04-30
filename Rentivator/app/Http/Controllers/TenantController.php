@@ -199,40 +199,44 @@ public function cancelReservation(Request $request, $id)
     return response()->json(['success' => true]);
 }
 
-    public function history()
-    {
-        $reservations = Reservation::where('user_id', Auth::id())
-            ->with('vehicle')
-            ->where('status', 'completed')
-            ->latest()->get();
+    // BAGO
+public function history()
+{
+    $reservations = Reservation::where('user_id', Auth::id())
+        ->with('vehicle')
+        ->where('status', 'completed')
+        ->whereNull('tenant_deleted_at')
+        ->latest()->get();
 
-        return view('tenant.history', compact('reservations'));
-    }
+    return view('tenant.history', compact('reservations'));
+}
 
     public function deleteHistory($id)
-    {
-        Reservation::where('id', $id)
-            ->where('user_id', auth()->id())
-            ->where('status', 'completed')
-            ->firstOrFail()->delete();
+{
+    Reservation::where('id', $id)
+        ->where('user_id', auth()->id())
+        ->where('status', 'completed')
+        ->firstOrFail()
+        ->update(['tenant_deleted_at' => now()]);
 
-        return response()->json(['success' => true]);
+    return response()->json(['success' => true]);
+}
+
+    // BAGO
+public function deleteSelectedHistory(Request $request)
+{
+    $ids = $request->input('ids', []);
+    if (empty($ids)) {
+        return response()->json(['success' => false, 'message' => 'No items selected.']);
     }
 
-    public function deleteSelectedHistory(Request $request)
-    {
-        $ids = $request->input('ids', []);
-        if (empty($ids)) {
-            return response()->json(['success' => false, 'message' => 'No items selected.']);
-        }
+    Reservation::whereIn('id', $ids)
+        ->where('user_id', auth()->id())
+        ->where('status', 'completed')
+        ->update(['tenant_deleted_at' => now()]);
 
-        Reservation::whereIn('id', $ids)
-            ->where('user_id', auth()->id())
-            ->where('status', 'completed')
-            ->delete();
-
-        return response()->json(['success' => true]);
-    }
+    return response()->json(['success' => true]);
+}
 
     public function reservation()
     {

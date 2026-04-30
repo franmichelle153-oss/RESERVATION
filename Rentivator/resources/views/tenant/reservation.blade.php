@@ -266,24 +266,48 @@
         }
 
         @media (max-width: 600px) {
-            .content { padding: 12px; }
-            .filter-bar { padding: 12px 14px; }
-            .card-inner { min-height: 60px; }
-            .bk-cell   { padding: 10px 6px; min-width: 0; max-width: 100%; overflow: hidden; }
-            .bk-action { flex: 0 0 56px; width: 56px; padding: 0 4px; overflow: hidden; gap: 4px; }
-            .bk-label  { font-size: 7px; letter-spacing: 0.5px; white-space: normal; word-break: break-word; line-height: 1.2; margin-bottom: 3px; }
-            .bk-value  { font-size: 10px; white-space: normal; word-break: break-word; line-height: 1.3; overflow: hidden; }
-            .bk-sub    { font-size: 8px; white-space: normal; word-break: break-word; margin-top: 2px; overflow: hidden; }
-            .cell-vehicle { flex: 0 0 22%; }
-            .cell-date    { flex: 0 0 30%; }
-            .cell-status  { flex: 0 0 22%; }
-            .cell-fee     { flex: 0 0 26%; }
-            .fee-amount { font-size: 12px; }
-            .status-badge { font-size: 7px; padding: 3px 5px; gap: 2px; white-space: normal; word-break: break-word; }
-            .filter-btn { padding: 6px 10px; font-size: 10px; }
-            .btn-delete, .btn-cancel-res { font-size: 7px; padding: 3px 5px; }
-            .cancel-modal-box { padding: 24px 20px; }
-        }
+    .content { padding: 12px; }
+    .filter-bar { padding: 12px 14px; }
+    .filter-btn { padding: 6px 10px; font-size: 10px; }
+    .cancel-modal-box { padding: 24px 20px; }
+
+    .card-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "vehicle date"
+            "status  fee"
+            "action  action";
+        min-height: unset;
+    }
+
+    .cell-vehicle { grid-area: vehicle; border-left: none; border-bottom: 1px solid #f0f5f0; }
+    .cell-date    { grid-area: date;    border-bottom: 1px solid #f0f5f0; }
+    .cell-status  { grid-area: status; }
+    .cell-fee     { grid-area: fee; }
+
+    .bk-action {
+        grid-area: action;
+        flex: unset; width: unset;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 8px 12px;
+        border-left: none;
+        border-top: 1px solid #f0f5f0;
+        gap: 8px;
+    }
+
+    .bk-cell  { padding: 10px 12px; }
+    .bk-label { font-size: 9px; letter-spacing: 1px; margin-bottom: 4px; white-space: nowrap; }
+    .bk-value { font-size: 12px; white-space: normal; word-break: break-word; line-height: 1.3; }
+    .bk-sub   { font-size: 9px; white-space: normal; word-break: break-word; margin-top: 2px; }
+    .fee-amount { font-size: 14px; }
+    .status-badge { font-size: 9px; padding: 4px 8px; white-space: normal; word-break: break-word; }
+    .btn-delete, .btn-cancel-res { font-size: 10px; padding: 6px 10px; }
+    .reason-tag { font-size: 9px; }
+}
     </style>
 </head>
 <body>

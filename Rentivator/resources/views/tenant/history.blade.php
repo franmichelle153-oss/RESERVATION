@@ -308,24 +308,51 @@
             .content { padding: 20px 16px; }
         }
 
-        @media (max-width: 600px) {
-            .content { padding: 12px; }
-            .section-card { padding: 16px; }
-            .history-toolbar { padding: 12px 14px; }
-            .hk-cell { padding: 10px 10px; }
-            .hk-label { font-size: 8px; }
-            .hk-value { font-size: 11px; }
-            .hk-sub { font-size: 8px; }
-            .fee-value { font-size: 13px; }
-            .btn-top-delete,
-            .btn-cancel-select,
-            .btn-delete-selected { font-size: 10px; padding: 8px 10px; }
-        }
+       @media (max-width: 600px) {
+    .content { padding: 12px; }
+    .section-card { padding: 16px; }
+    .history-toolbar { padding: 12px 14px; }
+
+    .history-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "vehicle date"
+            "status  fee";
+        min-height: unset;
+    }
+
+    /* If checkbox column is present (select mode), 
+       it spans full top before the grid */
+    .card-check {
+        grid-area: unset;
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: 1px solid #f0f5f0;
+        justify-content: flex-start;
+        padding: 8px 12px;
+    }
+
+    .hk-cell:nth-child(2) { grid-area: vehicle; border-left: none; border-bottom: 1px solid #f0f5f0; }
+    .hk-cell:nth-child(3) { grid-area: date;    border-bottom: 1px solid #f0f5f0; }
+    .hk-cell:nth-child(4) { grid-area: status; }
+    .hk-cell:nth-child(5) { grid-area: fee; }
+
+    .hk-cell  { padding: 10px 12px; }
+    .hk-label { font-size: 9px; letter-spacing: 1px; }
+    .hk-value { font-size: 12px; white-space: normal; word-break: break-word; line-height: 1.3; }
+    .hk-sub   { font-size: 9px; white-space: normal; word-break: break-word; }
+    .fee-value { font-size: 14px; }
+    .status-badge { font-size: 9px; padding: 4px 8px; }
+    .cell-fee { display: block !important; }
+
+    .btn-top-delete,
+    .btn-cancel-select,
+    .btn-delete-selected { font-size: 10px; padding: 8px 10px; }
+}
 
         /* Hide fee on very small phones */
-        @media (max-width: 400px) {
-            .cell-fee { display: none; }
-        }
+      
     </style>
 </head>
 <body>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rentivator - Fleet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -469,23 +469,18 @@
 
         /* Prevent iOS auto-zoom on inputs */
 @media (max-width: 768px) {
-    .form-input input,
-    .search-field input,
-    input[type="text"],
-    input[type="number"],
-    input[type="tel"],
-    input[type="date"],
-    select,
-    textarea {
+    .modal .form-input input,
+    .modal input[type="text"],
+    .modal input[type="number"],
+    .modal input[type="tel"],
+    .search-field input {
         font-size: 16px !important;
+        transform: scale(1);
     }
 }
 
-@media (max-width: 768px) {
-    .form-input input,
-    .search-field input {
-        font-size: 16px !important;
-    }
+input, select, textarea {
+    font-size: 16px !important;
 }
     </style>
 </head>
@@ -688,7 +683,8 @@
                     <label class="form-label">Reservation Date</label>
                     <div class="form-input" onclick="toggleCalendar()" style="cursor:pointer;">
                         <i class="fa-regular fa-calendar"></i>
-                        <input type="text" id="dateDisplay" placeholder="Click to select a date" readonly style="cursor:pointer;">
+                        <input type="text" id="dateDisplay" placeholder="Click to select a date" readonly 
+       style="cursor:pointer; font-size: 16px;">
                     </div>
                     <input type="hidden" id="modalReservationDate">
                 </div>

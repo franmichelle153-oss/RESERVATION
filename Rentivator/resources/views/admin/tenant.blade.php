@@ -259,6 +259,37 @@
         @media (max-width: 400px) {
             .cell-address { display: none; }
         }
+
+        @media (max-width: 640px) {
+    .tenant-row {
+        flex-direction: column;
+        min-height: unset;
+    }
+    .tenant-row > *:first-child { border-radius: 12px 12px 0 0; }
+    .tenant-row > *:last-child  { border-radius: 0 0 12px 12px; }
+    .bk-cell {
+        border-left: none;
+        border-top: 1px solid #f0f5f0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+    }
+    .bk-cell:first-child { border-top: none; }
+    .booking-label {
+        margin-bottom: 0;
+        margin-right: 12px;
+        flex-shrink: 0;
+        width: 80px;
+    }
+    .booking-value {
+        text-align: right;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+    }
+    .cell-address { display: flex !important; }
+}
     </style>
 </head>
 <body>

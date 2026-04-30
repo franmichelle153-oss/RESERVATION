@@ -150,6 +150,45 @@
         @media (max-width: 900px) { .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } .sidebar-close { display: flex; } .main { margin-left: 0; } .topbar { padding: 0 16px; } .hamburger { display: block; } .content { padding: 20px 16px; } .stats-mini { grid-template-columns: repeat(2,1fr); gap: 12px; } }
         @media (max-width: 600px) { .content { padding: 12px; } .section-card { padding: 14px; } .stats-mini { grid-template-columns: 1fr 1fr; gap: 10px; } .topbar { padding: 0 12px; height: 58px; } .main-tabs { width: 100%; } .main-tab { flex: 1; justify-content: center; padding: 10px 12px; } }
         @media (max-width: 400px) { .col-price { display: none; } }
+
+        @media (max-width: 640px) {
+    .booking-row {
+        flex-direction: column;
+        min-height: unset;
+    }
+    .booking-row > *:first-child { border-radius: 12px 12px 0 0; }
+    .booking-row > *:last-child  { border-radius: 0 0 12px 12px; }
+    .bk-cell {
+        border-left: none;
+        border-top: 1px solid #f0f5f0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+    }
+    .bk-cell:first-child { border-top: none; }
+    .booking-label {
+        margin-bottom: 0;
+        margin-right: 12px;
+        flex-shrink: 0;
+        width: 80px;
+    }
+    .booking-value { text-align: right; white-space: normal; }
+    .booking-actions {
+        flex: unset;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #f0f5f0;
+        justify-content: flex-end;
+        padding: 8px 14px;
+    }
+    .filter-row { flex-direction: column; align-items: stretch; }
+    .filter-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .filter-tab { text-align: center; }
+    .col-price { display: flex !important; }
+    .main-tabs { width: 100%; }
+    .main-tab { flex: 1; padding: 10px 8px; font-size: 10px; }
+}
     </style>
 </head>
 <body>

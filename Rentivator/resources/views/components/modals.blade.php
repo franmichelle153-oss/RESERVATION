@@ -678,6 +678,13 @@
         color: #6DBE47 !important;
         font-weight: 800 !important;
     }
+
+    /* Prevent iOS auto-zoom on inputs inside modals */
+#rp-edit-overlay input,
+#rp-edit-overlay select,
+#rp-edit-overlay textarea {
+    font-size: 16px !important;
+}
 </style>
 
 {{-- ── JAVASCRIPT ── --}}

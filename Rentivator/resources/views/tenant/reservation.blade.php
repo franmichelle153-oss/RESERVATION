@@ -263,6 +263,7 @@
             .topbar { padding: 0 16px; }
             .hamburger { display: block; }
             .content { padding: 20px 16px; }
+            .user-text { display: none; }
         }
 
         @media (max-width: 600px) {

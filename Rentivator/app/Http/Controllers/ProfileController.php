@@ -27,24 +27,21 @@ class ProfileController extends Controller
         $user->phone_number = $request->phone_number;
         $user->address      = $request->address;
 
-        if ($request->hasFile('profile_picture')) {
-            if ($user->profile_picture) {
-                Storage::disk('public')->delete($user->profile_picture);
-            }
-            $path = $request->file('profile_picture')->store('profiles', 'public');
-            $user->profile_picture = $path;
-        }
+       if ($request->hasFile('profile_picture')) {
+    $file   = $request->file('profile_picture');
+    $mime   = $file->getMimeType();
+    $base64 = base64_encode(file_get_contents($file->getRealPath()));
+    $user->profile_picture = 'data:' . $mime . ';base64,' . $base64;
+}
 
-        $user->save();
+$user->save();
 
-        return response()->json(['success' => true, 'user' => [
-            'name'            => $user->name,
-            'phone_number'    => $user->phone_number,
-            'address'         => $user->address,
-            'profile_picture' => $user->profile_picture
-                ? Storage::url($user->profile_picture)
-                : null,
-        ]]);
+return response()->json(['success' => true, 'user' => [
+    'name'            => $user->name,
+    'phone_number'    => $user->phone_number,
+    'address'         => $user->address,
+    'profile_picture' => $user->profile_picture ?? null,
+]]);
     }
 
     /**

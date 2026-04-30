@@ -190,7 +190,11 @@
     min-width: 0;
 }
         .bk-cell:first-child { border-left: none; }
-
+        .bk-cell.cell-block {
+    flex: 0 0 140px;
+    min-width: 140px;
+    align-items: center;
+}
         .booking-label { font-size: 9px; font-weight: 800; color: #8aaa92; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; white-space: nowrap; }
         .booking-value { font-size: 13px; font-weight: 700; color: #1a3d24; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .farmer-cell { display: flex; align-items: center; gap: 8px; }
@@ -263,35 +267,50 @@
             .cell-address { display: none; }
         }
 
-        @media (max-width: 640px) {
+       /* TABLET + MOBILE — stack into column */
+@media (max-width: 860px) {
     .tenant-row {
         flex-direction: column;
         min-height: unset;
     }
     .tenant-row > *:first-child { border-radius: 12px 12px 0 0; }
     .tenant-row > *:last-child  { border-radius: 0 0 12px 12px; }
+
     .bk-cell {
         border-left: none;
         border-top: 1px solid #f0f5f0;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 14px;
+        padding: 11px 14px;
+        flex: unset;
+        width: 100%;
     }
     .bk-cell:first-child { border-top: none; }
+
     .booking-label {
         margin-bottom: 0;
         margin-right: 12px;
         flex-shrink: 0;
-        width: 80px;
+        width: 110px;
     }
     .booking-value {
         text-align: right;
         white-space: normal;
         overflow: visible;
         text-overflow: unset;
+        flex: 1;
     }
     .cell-address { display: flex !important; }
+
+    .bk-cell.cell-block {
+        flex: unset;
+        min-width: unset;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 12px 14px;
+    }
 }
 
 .block-btn {
@@ -414,7 +433,7 @@
                     </div>
 
                     {{-- Block --}}
-<div class="bk-cell" style="flex:0 0 140px; min-width:140px; align-items:center;">
+<div class="bk-cell cell-block">
     <button class="block-btn"
             data-id="{{ $tenant->id }}"
             data-name="{{ $tenant->name }}"

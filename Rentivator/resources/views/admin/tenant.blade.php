@@ -180,12 +180,15 @@
 
         /* Each cell is equal width */
         .bk-cell {
-            flex: 1 1 0;
-            padding: 14px 16px;
-            display: flex; flex-direction: column; justify-content: center;
-            border-left: 1px solid #f0f5f0;
-            min-width: 0;
-        }
+    flex: 1 1 0;
+    padding: 14px 16px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: flex-start;  /* existing cells left-aligned */
+    border-left: 1px solid #f0f5f0;
+    min-width: 0;
+}
         .bk-cell:first-child { border-left: none; }
 
         .booking-label { font-size: 9px; font-weight: 800; color: #8aaa92; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; white-space: nowrap; }
@@ -411,7 +414,7 @@
                     </div>
 
                     {{-- Block --}}
-<div class="bk-cell" style="flex:0 0 110px; min-width:110px;">
+<div class="bk-cell" style="flex:0 0 140px; min-width:140px; align-items:center;">
     <button class="block-btn"
             data-id="{{ $tenant->id }}"
             data-name="{{ $tenant->name }}"

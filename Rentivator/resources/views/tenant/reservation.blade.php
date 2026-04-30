@@ -269,7 +269,8 @@
         @media (max-width: 600px) {
     .content { padding: 12px; }
     .filter-bar { padding: 12px 14px; }
-    .filter-btn { padding: 6px 10px; font-size: 10px; }
+    .filter-group { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+.filter-btn { padding: 6px 10px; font-size: 10px; white-space: nowrap; flex-shrink: 0; }
     .cancel-modal-box { padding: 24px 20px; }
 
     .card-inner {

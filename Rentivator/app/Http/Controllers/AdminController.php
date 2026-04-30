@@ -19,7 +19,9 @@ class AdminController extends Controller
     try { $this->runAutoOnField(); } catch (\Exception $e) { \Log::error($e->getMessage()); }
 
     $totalVehicles      = Vehicle::count();
-    $activeReservations = Reservation::where('status', 'confirmed')->count();
+    $activeReservations = Reservation::where('status', 'confirmed')
+    ->whereDate('reservation_date', Carbon::today())
+    ->count();
     $totalTenants       = Reservation::distinct('user_id')->count('user_id');
     $totalRevenue       = Transaction::sum('net_amount') - ExpenseDeduction::sum('amount');
 

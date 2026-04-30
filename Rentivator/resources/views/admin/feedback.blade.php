@@ -471,15 +471,7 @@
 </div>
 @endif
 
-{{-- SEARCH ONLY (no sentiment tabs) --}}
-<div class="section-card" style="margin-bottom:20px;">
-    <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput"
-               placeholder="Search by name or comment..."
-               oninput="filterFeedback()">
-    </div>
-</div>
+
 
 {{-- FEEDBACK LIST --}}
 <div id="feedbackList">
@@ -545,13 +537,7 @@
         });
     });
 
-    function filterFeedback() {
-    const q = document.getElementById('searchInput').value.toLowerCase();
-    document.querySelectorAll('.feedback-card').forEach(card => {
-        const search = card.dataset.search || '';
-        card.style.display = (!q || search.includes(q)) ? '' : 'none';
-    });
-}
+   
     function applyFilters() {
         const q = document.getElementById('searchInput').value.toLowerCase();
         const activeTab = document.querySelector('.filter-tab.active');

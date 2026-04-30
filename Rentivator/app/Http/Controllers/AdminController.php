@@ -335,6 +335,16 @@ class AdminController extends Controller
         return view('admin.tenant', compact('tenants'));
     }
 
+    public function blockTenant($id)
+{
+    $tenant = User::findOrFail($id);
+    $name   = $tenant->name;
+    $tenant->delete();
+
+    return redirect()->route('admin.tenants')
+        ->with('success', $name . '\'s account has been blocked and removed.');
+}
+
     // ── HELPERS ────────────────────────────────
     private function releaseVehicleIfFree(Reservation $booking): void
     {

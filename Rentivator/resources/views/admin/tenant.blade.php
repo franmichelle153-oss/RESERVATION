@@ -290,6 +290,32 @@
     }
     .cell-address { display: flex !important; }
 }
+
+.block-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; background: #fde8e8; color: #c0392b;
+    border: 1.5px solid #f8b4b4; border-radius: 8px;
+    font-size: 11px; font-weight: 800; cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s;
+    white-space: nowrap;
+}
+.block-btn:hover { background: #c0392b; color: white; border-color: #c0392b; }
+.block-confirm-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55); z-index: 600;
+    align-items: center; justify-content: center; padding: 20px;
+}
+.block-confirm-overlay.open { display: flex; }
+.block-confirm-box {
+    background: white; border-radius: 20px; padding: 40px 36px;
+    text-align: center; max-width: 380px; width: 100%;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+}
+.block-confirm-title { font-size: 18px; font-weight: 900; color: #1a3d24; margin-bottom: 8px; }
+.block-confirm-msg { font-size: 13px; color: #5a7a5e; line-height: 1.6; margin-bottom: 28px; }
+.block-confirm-btns { display: flex; gap: 12px; }
+.block-btn-no  { flex: 1; padding: 13px; border: 1.5px solid #e8f0e8; border-radius: 10px; background: white; color: #5a7a5e; font-size: 13px; font-weight: 800; cursor: pointer; }
+.block-btn-yes { flex: 1; padding: 13px; border: none; border-radius: 10px; background: #c0392b; color: white; font-size: 13px; font-weight: 800; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -384,6 +410,16 @@
                         <div class="booking-value">{{ $tenant->address ?? '—' }}</div>
                     </div>
 
+                    {{-- Block --}}
+<div class="bk-cell" style="flex:0 0 110px; min-width:110px;">
+    <button class="block-btn"
+            data-id="{{ $tenant->id }}"
+            data-name="{{ $tenant->name }}"
+            onclick="openBlockConfirm(this.dataset.id, this.dataset.name)">
+        <i class="fa-solid fa-ban"></i> Block
+    </button>
+</div>
+
                 </div>
             @empty
                 <div class="empty-state">
@@ -436,6 +472,47 @@
     @if(session('error'))
         showToast("{{ session('error') }}", true);
     @endif
+</script>
+
+{{-- BLOCK CONFIRM --}}
+<div class="block-confirm-overlay" id="blockOverlay">
+    <div class="block-confirm-box">
+        <i class="fa-solid fa-ban" style="font-size:52px; color:#c0392b; display:block; margin-bottom:16px;"></i>
+        <div class="block-confirm-title">Block Tenant?</div>
+        <div class="block-confirm-msg" id="blockMsg"></div>
+        <div class="block-confirm-btns">
+            <button class="block-btn-no" onclick="closeBlockConfirm()">No, Go Back</button>
+            <button class="block-btn-yes" onclick="executeBlock()">Yes, Block</button>
+        </div>
+    </div>
+</div>
+
+<form method="POST" id="blockForm" style="display:none;">
+    @csrf
+    @method('DELETE')
+</form>
+
+<script>
+    let blockId = null;
+    function openBlockConfirm(id, name) {
+        blockId = id;
+        document.getElementById('blockMsg').textContent =
+            'This will permanently delete ' + name + '\'s account. This cannot be undone.';
+        document.getElementById('blockOverlay').classList.add('open');
+    }
+    function closeBlockConfirm() {
+        blockId = null;
+        document.getElementById('blockOverlay').classList.remove('open');
+    }
+    function executeBlock() {
+        if (!blockId) return;
+        const form = document.getElementById('blockForm');
+        form.action = '/admin/tenants/' + blockId;
+        form.submit();
+    }
+    document.getElementById('blockOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeBlockConfirm();
+    });
 </script>
 
 @include('components.modals')

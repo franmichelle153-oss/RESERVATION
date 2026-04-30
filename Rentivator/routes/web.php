@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Tenants
     Route::get('/admin/tenants', [AdminController::class, 'tenants'])->name('admin.tenants');
-
+    Route::delete('/admin/tenants/{id}', [AdminController::class, 'blockTenant'])->name('admin.tenants.block');
     // TENANT
     Route::get('/tenant/vehicle',                    [TenantController::class, 'vehicle'])->name('tenant.vehicle');
     Route::get('/tenant/history',                    [TenantController::class, 'history'])->name('tenant.history');

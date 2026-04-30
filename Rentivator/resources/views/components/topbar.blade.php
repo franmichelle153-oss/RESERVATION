@@ -37,12 +37,12 @@
                     <img src="{{ Storage::url(auth()->user()->profile_picture) }}"
                          style="width:100%; height:100%; object-fit:cover;" id="rp-topbar-avatar">
                 @else
-                    <span id="rp-topbar-initials" style="color:white; font-weight:700; font-size:14px;">
-                        {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 2)) }}
-                    </span>
-                    <img src="" id="rp-topbar-avatar"
-                         style="display:none; width:100%; height:100%; object-fit:cover;">
-                @endif
+    <span id="rp-topbar-initials" style="color:white; font-weight:700; font-size:14px;">
+        {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 2)) }}
+    </span>
+    <img id="rp-topbar-avatar"
+         style="display:none; width:100%; height:100%; object-fit:cover;">
+@endif
             </div>
             <div class="user-text" style="text-align:left;">
                 <div style="font-size:13px; font-weight:700;" class="rp-topbar-username" id="rp-topbar-name">

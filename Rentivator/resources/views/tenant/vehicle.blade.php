@@ -210,9 +210,11 @@
         .form-input:focus-within { border-color: #6DBE47; background: white; }
         .form-input i { color: #8aaa92; font-size: 15px; flex-shrink: 0; }
         .form-input input {
-            border: none; outline: none; font-size: 14px; color: #1a3d24;
-            background: transparent; width: 100%; font-family: inherit;
-        }
+    border: none; outline: none; font-size: 14px; color: #1a3d24;
+    background: transparent; width: 100%; font-family: inherit;
+    /* iOS auto-zoom fix */
+    -webkit-text-size-adjust: 100%;
+}
 
         .btn-confirm {
             width: 100%; padding: 16px; background: #1e4d2b; color: white;
@@ -464,6 +466,27 @@
             .search-card  { padding: 12px 16px; }
             .modal-body   { padding: 20px; }
         }
+
+        /* Prevent iOS auto-zoom on inputs */
+@media (max-width: 768px) {
+    .form-input input,
+    .search-field input,
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-input input,
+    .search-field input {
+        font-size: 16px !important;
+    }
+}
     </style>
 </head>
 <body>

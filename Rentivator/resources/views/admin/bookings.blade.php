@@ -89,7 +89,7 @@
         .action-btn { width: 28px; height: 28px; border: none; background: transparent; cursor: pointer; font-size: 14px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; border-radius: 50%; }
         .action-btn.dots { color: #8aaa92; font-size: 13px; }
         .action-btn.dots:hover { background: #f0f5f0; color: #1a3d24; }
-        .dots-menu { display: none; position: absolute; right: 0; top: 40px; background: white; border: 1px solid #e8f0e8; border-radius: 12px; box-shadow: 0 8px 32px rgba(30,77,43,0.2); z-index: 9999; min-width: 200px; overflow: hidden; }
+        .dots-menu { display: none; position: fixed; background: white; border: 1px solid #e8f0e8; border-radius: 12px; box-shadow: 0 8px 32px rgba(30,77,43,0.2); z-index: 9999; min-width: 200px; overflow: hidden; }
         .dots-menu.open { display: block; }
         .dots-menu-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; font-size: 12px; font-weight: 700; color: #1a3d24; transition: background 0.15s; border: none; background: none; width: 100%; text-align: left; }
         .dots-menu-item:hover { background: #f4f7f4; }
@@ -151,29 +151,69 @@
         @media (max-width: 600px) { .content { padding: 12px; } .section-card { padding: 14px; } .stats-mini { grid-template-columns: 1fr 1fr; gap: 10px; } .topbar { padding: 0 12px; height: 58px; } .main-tabs { width: 100%; } .main-tab { flex: 1; justify-content: center; padding: 10px 12px; } }
         @media (max-width: 400px) { .col-price { display: none; } }
 
-        @media (max-width: 640px) {
+       @media (max-width: 640px) {
     .booking-row {
         flex-direction: column;
         min-height: unset;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        overflow: visible;
+        border-left: 4px solid #6DBE47;
     }
-    .booking-row > *:first-child { border-radius: 12px 12px 0 0; }
-    .booking-row > *:last-child  { border-radius: 0 0 12px 12px; }
-    .bk-cell {
+
+    /* Header strip — farmer name */
+    .booking-row .bk-cell:first-child {
+        background: #f4f9f4;
+        border-top: none;
+        border-left: none;
+        border-bottom: 2px solid #e8f0e8;
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .booking-row .bk-cell:first-child .booking-label { 
+        display: block;
+        margin-bottom: 0;
+        margin-right: 12px;
+        width: 90px;
+        flex-shrink: 0;
+    }
+    .booking-row .bk-cell:first-child .booking-value {
+        font-size: 15px;
+        font-weight: 900;
+        color: #1a3d24;
+        text-align: right;
+    }
+    .booking-row .bk-cell:first-child .farmer-cell {
+        justify-content: flex-end;
+    }
+
+    /* All other cells */
+    .booking-row .bk-cell {
         border-left: none;
         border-top: 1px solid #f0f5f0;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 14px;
+        padding: 11px 16px;
     }
-    .bk-cell:first-child { border-top: none; }
-    .booking-label {
+    .booking-row .booking-label {
         margin-bottom: 0;
         margin-right: 12px;
         flex-shrink: 0;
-        width: 80px;
+        width: 90px;
+        font-size: 9px;
     }
-    .booking-value { text-align: right; white-space: normal; }
+    .booking-row .booking-value {
+        text-align: right;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+        font-size: 13px;
+    }
+
+    /* Actions row at bottom */
     .booking-actions {
         flex: unset;
         width: 100%;
@@ -182,10 +222,20 @@
         justify-content: flex-end;
         padding: 8px 14px;
     }
-    .filter-row { flex-direction: column; align-items: stretch; }
-    .filter-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    .filter-tab { text-align: center; }
+
+    /* Show price column always */
     .col-price { display: flex !important; }
+
+    /* Filter tabs */
+    .filter-row { flex-direction: column; align-items: stretch; }
+    .filter-tabs { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 6px; 
+    }
+    .filter-tab { text-align: center; }
+
+    /* Main tabs */
     .main-tabs { width: 100%; }
     .main-tab { flex: 1; padding: 10px 8px; font-size: 10px; }
 }
@@ -648,16 +698,40 @@
 
     // ── Dots menu
     document.addEventListener('click', function(e) {
-        const dotsBtn = e.target.closest('.bk-dots-btn');
-        if (dotsBtn) {
-            e.stopPropagation();
-            const id      = dotsBtn.dataset.id;
-            const menu    = document.getElementById('dots-' + id);
-            const wasOpen = menu && menu.classList.contains('open');
-            closeAllMenus();
-            if (menu && !wasOpen) menu.classList.add('open');
-            return;
-        }
+       const dotsBtn = e.target.closest('.bk-dots-btn');
+if (dotsBtn) {
+    e.stopPropagation();
+    const id      = dotsBtn.dataset.id;
+    const menu    = document.getElementById('dots-' + id);
+    const wasOpen = menu && menu.classList.contains('open');
+    closeAllMenus();
+    if (menu && !wasOpen) {
+        // Iposition ang menu gamit ang button coordinates
+        const rect = dotsBtn.getBoundingClientRect();
+        const menuWidth = 200;
+        let top  = rect.bottom + 6;
+        let left = rect.right - menuWidth;
+
+        // Kung malapit sa ibaba ng screen, buksan pataas
+        // Kung malapit sa ibaba ng screen, buksan pataas
+menu.style.visibility = 'hidden';
+menu.style.display = 'block';
+const menuHeight = menu.offsetHeight;
+menu.style.display = '';
+menu.style.visibility = '';
+
+if (top + menuHeight > window.innerHeight - 8) {
+    top = rect.top - menuHeight - 6;
+}
+        // Kung malapit sa kaliwa ng screen
+        if (left < 8) left = 8;
+
+        menu.style.top  = top + 'px';
+        menu.style.left = left + 'px';
+        menu.classList.add('open');
+    }
+    return;
+}
         const actionBtn = e.target.closest('.bk-action-btn');
         if (actionBtn) {
             e.stopPropagation();

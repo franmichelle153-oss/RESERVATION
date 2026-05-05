@@ -9,7 +9,7 @@
                 <div style="position:relative; cursor:pointer;" onclick="document.getElementById('rp-photo-input').click()">
                     <div style="width:72px; height:72px; border-radius:50%; overflow:hidden; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; border:3px solid rgba(255,255,255,0.4);">
                         @if(auth()->user()->profile_picture)
-                            <img src="{{ Storage::url(auth()->user()->profile_picture) }}" style="width:100%; height:100%; object-fit:cover;" id="rp-modal-avatar">
+                            <img src="{{ auth()->user()->profile_picture }}" style="width:100%; height:100%; object-fit:cover;" id="rp-modal-avatar">
                         @else
                             <span id="rp-modal-initials" style="color:white; font-size:24px; font-weight:800;">{{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 2)) }}</span>
                             <img src="" id="rp-modal-avatar" style="display:none; width:100%; height:100%; object-fit:cover;">

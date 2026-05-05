@@ -100,6 +100,11 @@
         @media (max-width: 900px) { .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } .sidebar-close { display: flex; } .main { margin-left: 0; } .topbar { padding: 0 16px; } .hamburger { display: block; } .content { padding: 20px 16px; } .vehicle-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
         @media (max-width: 600px) { .vehicle-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .form-row { grid-template-columns: 1fr; } .topbar { padding: 0 12px; height: 58px; } }
         @media (max-width: 380px) { .vehicle-grid { grid-template-columns: 1fr; } }
+
+        /* Prevent iOS auto-zoom */
+input, select, textarea {
+    font-size: 16px !important;
+}
     </style>
 </head>
 <body>

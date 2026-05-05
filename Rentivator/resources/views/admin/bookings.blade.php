@@ -294,8 +294,7 @@
         {{-- MAIN TABS --}}
         <div class="main-tabs">
             <button class="main-tab active" id="tab-active" onclick="switchToTab('active')">
-                <i class="fa-regular fa-calendar"></i> Active Bookings
-                <span class="tab-count">{{ $bookings->count() }}</span>
+                <i class="fa-regular fa-calendar"></i> Booking Status
             </button>
             <button class="main-tab" id="tab-completed" onclick="switchToTab('completed')">
                 <i class="fa-regular fa-circle-check"></i> Completed & Sales
@@ -308,7 +307,7 @@
         ══════════════════════════════════════ --}}
         <div class="tab-panel active" id="panel-active">
             <div class="section-card">
-                <div class="section-title"><div class="accent"></div> Active Bookings</div>
+                <div class="section-title"><div class="accent"></div> Booking Status</div>
                 <div class="filter-row">
                     <div class="search-box" style="flex:1;min-width:180px;max-width:400px;">
                         <i class="fa-solid fa-magnifying-glass"></i>

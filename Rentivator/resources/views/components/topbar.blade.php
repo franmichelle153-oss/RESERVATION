@@ -34,7 +34,7 @@
             <div style="width:38px; height:38px; border-radius:10px; overflow:hidden; flex-shrink:0;
                         background:#1e4d2b; display:flex; align-items:center; justify-content:center;">
                 @if(auth()->user()->profile_picture)
-                <img src="{{ Storage::url(auth()->user()->profile_picture) }}"
+                   <img src="{{ auth()->user()->profile_picture }}"
      style="width:100%; height:100%; object-fit:cover;" id="rp-topbar-avatar">
                 @else
     <span id="rp-topbar-initials" style="color:white; font-weight:700; font-size:14px;">

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rentivator - Vehicles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -72,7 +72,7 @@
         .modal-close:hover { background: #fde8e8; color: #e74c3c; }
         .form-group { margin-bottom: 18px; }
         .form-label { display: block; font-size: 11px; font-weight: 800; color: #8aaa92; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-        .form-control { width: 100%; padding: 12px 16px; border: 1.5px solid #ddeedd; border-radius: 10px; font-size: 14px; color: #1a3d24; background: white; outline: none; transition: border-color 0.2s; font-family: 'Segoe UI', sans-serif; }
+        .form-control { width: 100%; padding: 12px 16px; border: 1.5px solid #ddeedd; border-radius: 10px; font-size: 16px; color: #1a3d24; background: white; outline: none; transition: border-color 0.2s; font-family: 'Segoe UI', sans-serif; }
         .form-control:focus { border-color: #6DBE47; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .img-upload-box { border: 2px dashed #ddeedd; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: #f9fdf9; position: relative; overflow: hidden; }
@@ -101,10 +101,7 @@
         @media (max-width: 600px) { .vehicle-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .form-row { grid-template-columns: 1fr; } .topbar { padding: 0 12px; height: 58px; } }
         @media (max-width: 380px) { .vehicle-grid { grid-template-columns: 1fr; } }
 
-        /* Prevent iOS auto-zoom */
-input, select, textarea {
-    font-size: 16px !important;
-}
+      
     </style>
 </head>
 <body>

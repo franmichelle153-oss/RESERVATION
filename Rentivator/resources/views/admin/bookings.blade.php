@@ -385,12 +385,7 @@
                                                 data-date="{{ \Carbon\Carbon::parse($b->reservation_date)->format('M d, Y') }}">
                                             <i class="fa-regular fa-circle-xmark"></i> Cancel
                                         </button>
-                                        <button class="dots-menu-item danger bk-action-btn"
-                                                data-action="delete" data-id="{{ $b->id }}"
-                                                data-name="{{ $b->user->name ?? 'N/A' }}"
-                                                data-date="{{ \Carbon\Carbon::parse($b->reservation_date)->format('M d, Y') }}">
-                                            <i class="fa-regular fa-trash-can"></i> Delete
-                                        </button>
+                                       
                                     @endif
                                     @if($b->status === 'confirmed')
                                         <button class="dots-menu-item bk-action-btn"
